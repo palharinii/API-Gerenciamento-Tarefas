@@ -16,11 +16,15 @@ public class TarefaService {
     }
 
     public TarefaResponse criar(TarefaRequest request) {
-        Tarefa tarefa = new Tarefa(
-                request.nome(),
-                request.descricao(),
-                request.prazoEntrega()
-        );
+        Tarefa tarefa = new Tarefa(request.nome(), request.descricao(), request.prazoEntrega());
+
+        if(request.status() != null) {
+            tarefa.setStatus(request.status());
+        }
+
+        if(request.prioridade() != null) {
+            tarefa.setPrioridade(request.prioridade());
+        }
 
         tarefaRepository.save(tarefa);
 
@@ -28,7 +32,8 @@ public class TarefaService {
     }
 
     public Optional<TarefaResponse> buscar(Long id) {
-        return tarefaRepository.findById(id).map(TarefaResponse::new);
+        return tarefaRepository.findById(id)
+                .map(TarefaResponse::new);
     }
 
     public List<TarefaResponse> buscarTodos() {

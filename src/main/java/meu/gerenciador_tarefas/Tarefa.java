@@ -15,12 +15,12 @@ public class Tarefa {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank private String nome;
+    private String nome;
     private String descricao;
     @Enumerated(EnumType.STRING) private Status status = Status.PENDENTE;
     @Enumerated(EnumType.STRING) private Prioridade prioridade = Prioridade.BAIXA;
-    private LocalDate dataCriacao = LocalDate.now(ZoneId.of("America/Sao_Paulo"));
-    @NotNull private LocalDate prazoEntrega;
+    private final LocalDate dataCriacao = LocalDate.now(ZoneId.of("America/Sao_Paulo"));
+    private LocalDate prazoEntrega;
 
     public Tarefa() {}
 
